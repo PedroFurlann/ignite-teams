@@ -1,3 +1,4 @@
+import { Button } from "@components/Button";
 import { EmptyList } from "@components/EmptyList";
 import { GroupCard } from "@components/GroupCard";
 import { Header } from "@components/Header";
@@ -33,6 +34,8 @@ export function Groups() {
           />
         )}
       />
+
+      <Button title="Criar nova turma" />
     </Container>
   )
 } 
