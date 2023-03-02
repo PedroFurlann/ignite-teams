@@ -1,4 +1,6 @@
+import { Button } from "@components/Button";
 import { ButtonIcon } from "@components/ButtonIcon";
+import { EmptyList } from "@components/EmptyList";
 import { Filter } from "@components/Filter";
 import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
@@ -14,7 +16,7 @@ import {
 } from "./styles";
 
 export function Players() {
-  const [players, setPlayers] = useState<string[]>(['Furlan', 'Zeca']);
+  const [players, setPlayers] = useState<string[]>([]);
   const [team, setTeam] = useState("Time A");
 
   return (
@@ -49,13 +51,23 @@ export function Players() {
         <NumbersOfPlayers>{players.length}</NumbersOfPlayers>
       </HeaderList>
 
-      <FlatList 
-        data={players} 
-        keyExtractor={(item) => item} 
+      <FlatList
+        data={players}
+        keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <PlayerCard icon="person" name={item} onRemove={() => {}} />
         )}
+        ListEmptyComponent={() => (
+          <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
+        )}
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={[
+          { paddingBottom: 100 },
+          players.length === 0 && { flex: 1 }
+        ]}
       />
+
+      <Button title="Remover Turma" type="SECONDARY" />
     </Container>
   );
 }
