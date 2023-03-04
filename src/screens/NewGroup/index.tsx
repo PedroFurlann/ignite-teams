@@ -17,7 +17,7 @@ export function NewGroup() {
   async function handleCreateNewGroup() {
     try {
       if(group.trim().length === 0) {
-        return Alert.alert('Novo Grupo', 'Informe o Nome do Grupo!');
+        return Alert.alert('Novo Grupo', 'Informe o nome do Grupo!');
       }
 
       await groupCreate(group);
