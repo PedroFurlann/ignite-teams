@@ -3,6 +3,7 @@ import { Header } from "@components/Header";
 import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
 import { useNavigation } from "@react-navigation/native";
+import { groupCreate } from "@storage/group/groupCreate";
 import { useState } from "react";
 import { Container, ContentContainer, Icon } from "./styles";
 
@@ -11,8 +12,14 @@ export function NewGroup() {
 
   const navigation = useNavigation();
 
-  function handleNew() {
-    navigation.navigate('players', { group })
+  async function handleCreateNewGroup() {
+    try {
+      await groupCreate(group);
+      navigation.navigate('players', { group })
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -27,7 +34,7 @@ export function NewGroup() {
         />
 
         <Input placeholder="Nome da turma" onChangeText={setGroup} />
-        <Button title="Criar" style={{ marginTop: 20 }} onPress={handleNew} />
+        <Button title="Criar" style={{ marginTop: 20 }} onPress={handleCreateNewGroup} />
       </ContentContainer>
     </Container>
   );
