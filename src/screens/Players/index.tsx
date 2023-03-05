@@ -7,8 +7,11 @@ import { Highlight } from "@components/Highlight";
 import { Input } from "@components/Input";
 import { PlayerCard } from "@components/PlayerCard";
 import { useRoute } from "@react-navigation/native";
+import { playerAddByGroup } from "@storage/player/playerAddByGroup";
+import { playersGetByGroup } from "@storage/player/playersGetByGroup";
+import { AppError } from "@utils/AppError";
 import { useState } from "react";
-import { FlatList } from "react-native";
+import { Alert, FlatList } from "react-native";
 import {
   Container,
   FormContainer,
@@ -21,11 +24,37 @@ interface RouteParams {
 }
 
 export function Players() {
+  const [playerName, setPlayerName] = useState('');
   const [players, setPlayers] = useState<string[]>([]);
   const [team, setTeam] = useState("Time A");
 
   const route = useRoute();
   const { group } = route.params as RouteParams
+
+  async function handleAddNewPlayer() {
+    if(playerName.trim().length === 0) {
+      return Alert.alert('Novo Jogador', 'Informe o nome do jogador!');
+    }
+
+    const newPlayer = {
+      name: playerName,
+      team,
+    }
+
+    try {
+      await playerAddByGroup(newPlayer, group);
+      const players = await playersGetByGroup(group);
+      console.log(players)
+
+    } catch (error) {
+      if(error instanceof AppError) {
+        Alert.alert('Novo jogador', error.message)
+      } else {
+        console.log(error);
+        Alert.alert('Novo jogador', 'Não foi possível cadastrar o novo Jogador!')
+      }
+    }
+  }
 
   return (
     <Container>
@@ -37,9 +66,9 @@ export function Players() {
       />
 
       <FormContainer>
-        <Input placeholder="Nome do jogador" autoCorrect={false} />
+        <Input placeholder="Nome do jogador" autoCorrect={false} onChangeText={setPlayerName} />
 
-        <ButtonIcon icon="add" />
+        <ButtonIcon icon="add" onPress={handleAddNewPlayer} />
       </FormContainer>
 
       <HeaderList>
