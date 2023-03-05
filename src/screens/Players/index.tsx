@@ -81,7 +81,7 @@ export function Players() {
       />
 
       <FormContainer>
-        <Input placeholder="Nome do jogador" autoCorrect={false} onChangeText={setPlayerName} />
+        <Input placeholder="Nome do jogador" autoCorrect={false} onChangeText={setPlayerName}  />
 
         <ButtonIcon icon="add" onPress={handleAddNewPlayer} />
       </FormContainer>
