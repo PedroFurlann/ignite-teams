@@ -9,6 +9,7 @@ import { PlayerCard } from "@components/PlayerCard";
 import { useRoute } from "@react-navigation/native";
 import { playerAddByGroup } from "@storage/player/playerAddByGroup";
 import { playersGetByGroupAndTeam } from "@storage/player/playerGetByGroupAndTeam";
+import { playerRemoveByGroup } from "@storage/player/playerRemoveByGroup";
 import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
 import { AppError } from "@utils/AppError";
 import { useEffect, useRef, useState } from "react";
@@ -63,6 +64,17 @@ export function Players() {
     }
   }
 
+  async function handlePlayerRemove(playerName: string) {
+    try {
+      await playerRemoveByGroup(playerName, group);
+      fetchPlayersByTeam();
+
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Remover Jogador', `Não foi possível remover o jogador${playerName}!`)
+    }
+  }
+
   async function fetchPlayersByTeam() {
     try {
       const playersByTeam = await playersGetByGroupAndTeam(group, team);
@@ -75,6 +87,7 @@ export function Players() {
       );
     }
   }
+  
 
   useEffect(() => {
     fetchPlayersByTeam();
@@ -121,7 +134,7 @@ export function Players() {
         data={players}
         keyExtractor={(item) => item.name}
         renderItem={({ item }) => (
-          <PlayerCard icon="person" name={item.name} onRemove={() => {}} />
+          <PlayerCard icon="person" name={item.name} onRemove={() => handlePlayerRemove(item.name)} />
         )}
         ListEmptyComponent={() => (
           <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
