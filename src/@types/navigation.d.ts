@@ -6,6 +6,7 @@ export declare global {
       players: {
         group: string;
       }
+      match: undefined;
     }
   }
 }

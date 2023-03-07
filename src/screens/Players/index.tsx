@@ -18,6 +18,7 @@ import { useEffect, useRef, useState } from "react";
 import { Alert, FlatList, TextInput } from "react-native";
 import {
   Container,
+  FooterContainer,
   FormContainer,
   HeaderList,
   NumberOfPlayers,
@@ -65,6 +66,10 @@ export function Players() {
         );
       }
     }
+  }
+
+  function handleGoToTheMatch() {
+    navigaton.navigate("match")
   }
 
   async function handlePlayerRemove(playerName: string) {
@@ -121,7 +126,7 @@ export function Players() {
 
     } finally {
       setIsLoading(false);
-      
+
     }
   }
 
@@ -189,11 +194,19 @@ export function Players() {
           ]}
         />
       )}
-      <Button
-        title="Remover Turma"
-        type="SECONDARY"
-        onPress={handleGroupRemove}
-      />
+      <FooterContainer>
+        <Button
+          title="Remover Turma"
+          type="SECONDARY"
+          onPress={handleGroupRemove}
+        />
+
+        <Button 
+          title="Ir para a Partida"
+          style={{ marginLeft: 12 }}
+          onPress={handleGoToTheMatch}
+        />
+      </FooterContainer>
     </Container>
   );
 }

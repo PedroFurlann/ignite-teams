@@ -31,3 +31,7 @@ export const NumberOfPlayers = styled.Text`
     font-size: ${theme.FONT_SIZE.SM}px;
   `}
 `;
+
+export const FooterContainer = styled.View`
+  flex-direction: row;
+`;
