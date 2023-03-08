@@ -69,6 +69,10 @@ export function Players() {
   }
 
   function handleGoToTheMatch() {
+    if(players.length <= 1) {
+      return Alert.alert("Jogadores", "Adicione pelo menos um jogador em cada time para começar a partida!")
+    }
+
     navigaton.navigate("match", { group })
   }
 
