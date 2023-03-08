@@ -1,7 +1,7 @@
 import { Container, MessageContainer } from "./styles"
 
 interface EmptyListProps {
-  message: string
+  message?: string
 }
 
 export function EmptyList({ message }: EmptyListProps) {

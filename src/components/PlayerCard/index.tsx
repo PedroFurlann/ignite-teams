@@ -5,7 +5,7 @@ import { ButtonIcon } from "@components/ButtonIcon";
 interface PlayerCardProps {
   name: string;
   icon: keyof typeof MaterialIcons.glyphMap;
-  onRemove?: () => void;
+  onRemove: () => void;
 }
 
 export function PlayerCard({ name, icon, onRemove }: PlayerCardProps) {

@@ -8,6 +8,7 @@ import { Alert, FlatList } from "react-native";
 import {
   Container,
   HeaderListContainer,
+  ListContainer,
   NumberOfPointsContainer,
   TitleContainer,
 } from "./styles";
@@ -150,35 +151,37 @@ export function Match() {
         <TitleContainer>Time B</TitleContainer>
       </HeaderListContainer>
 
-      <FlatList
-          data={playersTeamA}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => (
-            <PlayerCard
-              icon="person"
-              name={item.name}
-            />
-          )}
-          ListEmptyComponent={() => (
-            <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
-          )}
-          showsVerticalScrollIndicator={false}
-      /> 
-
-      <FlatList
-          data={playersTeamB}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => (
-            <PlayerCard
-              icon="person"
-              name={item.name}
-            />
-          )}
-          ListEmptyComponent={() => (
-            <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
-          )}
-          showsVerticalScrollIndicator={false}
-      />   
+      <ListContainer>
+        <FlatList
+            data={playersTeamA}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => (
+              <PlayerCard
+                icon="person"
+                name={item.name}
+              />
+            )}
+            ListEmptyComponent={() => (
+              <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
+            )}
+            showsVerticalScrollIndicator={false}
+        />
+        <FlatList
+            data={playersTeamB}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => (
+              <PlayerCard
+                icon="person"
+                name={item.name}
+                style={{ marginBottom: 10 }}
+              />
+            )}
+            ListEmptyComponent={() => (
+              <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
+            )}
+            showsVerticalScrollIndicator={false}
+        />
+      </ListContainer>
     </Container>
   );
 }

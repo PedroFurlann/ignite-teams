@@ -30,3 +30,7 @@ export const NumberOfPointsContainer = styled.Text`
   `}
 `;
 
+export const ListContainer = styled.View`
+  flex-direction: row;
+`
+
