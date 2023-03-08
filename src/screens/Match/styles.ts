@@ -4,7 +4,7 @@ import styled, { css } from "styled-components/native";
 export const Container = styled(SafeAreaView)`
   flex: 1;
   background-color: ${(props) => props.theme.COLORS.GRAY_600};
-  padding: 24px;
+  /* padding: 24px; */
 `;
 
 export const HeaderListContainer = styled.View`
@@ -32,5 +32,6 @@ export const NumberOfPointsContainer = styled.Text`
 
 export const ListContainer = styled.View`
   flex-direction: row;
-`
+  align-items: center;
+`;
 
