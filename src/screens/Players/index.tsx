@@ -24,7 +24,7 @@ import {
   NumberOfPlayers,
 } from "./styles";
 
-interface RouteParams {
+export interface RouteParams {
   group: string;
 }
 
@@ -69,7 +69,7 @@ export function Players() {
   }
 
   function handleGoToTheMatch() {
-    navigaton.navigate("match")
+    navigaton.navigate("match", { group })
   }
 
   async function handlePlayerRemove(playerName: string) {
