@@ -18,8 +18,10 @@ import { PlayerStorageDTO } from "@storage/player/PlayerStorageDTO";
 import { EmptyList } from "@components/EmptyList";
 import { MatchPlayerCard } from "@components/MatchPlayerCard";
 import { Button } from "@components/Button";
+import { Loading } from "@components/Loading";
 
 export function Match() {
+  const [isLoading, setIsLoading] = useState(true);
   const [pointsCounterTeamA, setPointsCounterTeamA] = useState(0);
   const [pointsCounterTeamB, setPointsCounterTeamB] = useState(0);
   const [playersTeamA, setPlayersTeamA] = useState<PlayerStorageDTO[]>([]);
@@ -32,9 +34,12 @@ export function Match() {
 
   function handleAddOnePointTeamA() {
     if (playersTeamA.length === 0) {
-      return Alert.alert("Pontuação", "Só é possível adicionar pontuações a um time com participantes!")
+      return Alert.alert(
+        "Pontuação",
+        "Só é possível adicionar pontuações a um time com participantes!"
+      );
     }
-    
+
     setPointsCounterTeamA((state) => state + 1);
   }
 
@@ -51,7 +56,10 @@ export function Match() {
 
   function handleAddOnePointTeamB() {
     if (playersTeamB.length === 0) {
-      return Alert.alert("Pontuação", "Só é possível adicionar pontuações a um time com participantes!")
+      return Alert.alert(
+        "Pontuação",
+        "Só é possível adicionar pontuações a um time com participantes!"
+      );
     }
 
     setPointsCounterTeamB((state) => state + 1);
@@ -74,7 +82,7 @@ export function Match() {
 
   async function fetchPlayersByTeamA() {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
 
       const playersTeamA = await playersGetByGroupAndTeam(group, "Time A");
 
@@ -85,16 +93,14 @@ export function Match() {
         "Jogadores",
         "Não foi possível carregar a lista de jogadores do time selecionado!"
       );
+    } finally {
+      setIsLoading(false);
     }
-    //   finally {
-    // //   setIsLoading(false);
-
-    // // }
   }
 
   async function fetchPlayersByTeamB() {
     try {
-      // setIsLoading(true);
+      setIsLoading(true);
 
       const playersTeamB = await playersGetByGroupAndTeam(group, "Time B");
 
@@ -105,11 +111,9 @@ export function Match() {
         "Jogadores",
         "Não foi possível carregar a lista de jogadores do time selecionado!"
       );
+    } finally {
+      setIsLoading(false);
     }
-    //   finally {
-    // //   setIsLoading(false);
-
-    // // }
   }
 
   useEffect(() => {
@@ -161,45 +165,53 @@ export function Match() {
       </HeaderListContainer>
 
       <ListContainer>
-        <FlatList
-          data={playersTeamA}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => (
-            <MatchPlayerCard icon="person" name={item.name} />
-          )}
-          ListEmptyComponent={() => (
-            <EmptyList
-              message="Não possuem jogadores cadastrados nesse time! Que tal cadastrar novos jogadores?"
-              addBtn
-              onReturnScreen={() => handleReturnToPlayers(group)}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[
-            { marginLeft: 20, paddingBottom: 100 },
-            playersTeamA.length <= 0 && { flex: 1, marginRight: 10 }
-          ]}
-        />
-        <FlatList
-          data={playersTeamB}
-          keyExtractor={(item) => item.name}
-          renderItem={({ item }) => (
-            <MatchPlayerCard icon="person" name={item.name} />
-          )}
-          ListEmptyComponent={() => (
-            <EmptyList
-              message="Não possuem jogadores cadastrados nesse time! Que tal cadastrar novos jogadores?"
-              addBtn
-              onReturnScreen={() => handleReturnToPlayers(group)}
-            />
-          )}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={[
-            { paddingBottom: 100 },
-            playersTeamB.length > 0 && { marginLeft: 40, marginRight: -20 },
-            playersTeamB.length <= 0 && { flex: 1, marginLeft: 15 }
-          ]}
-        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            data={playersTeamA}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => (
+              <MatchPlayerCard icon="person" name={item.name} />
+            )}
+            ListEmptyComponent={() => (
+              <EmptyList
+                message="Não possuem jogadores cadastrados nesse time! Que tal cadastrar novos jogadores?"
+                addBtn
+                onReturnScreen={() => handleReturnToPlayers(group)}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={[
+              { marginLeft: 20, paddingBottom: 100 },
+              playersTeamA.length <= 0 && { flex: 1, marginRight: 10 },
+            ]}
+          />
+        )}
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <FlatList
+            data={playersTeamB}
+            keyExtractor={(item) => item.name}
+            renderItem={({ item }) => (
+              <MatchPlayerCard icon="person" name={item.name} />
+            )}
+            ListEmptyComponent={() => (
+              <EmptyList
+                message="Não possuem jogadores cadastrados nesse time! Que tal cadastrar novos jogadores?"
+                addBtn
+                onReturnScreen={() => handleReturnToPlayers(group)}
+              />
+            )}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={[
+              { paddingBottom: 100 },
+              playersTeamB.length > 0 && { marginLeft: 40, marginRight: -20 },
+              playersTeamB.length <= 0 && { flex: 1, marginLeft: 15 },
+            ]}
+          />
+        )}
       </ListContainer>
 
       <Button
