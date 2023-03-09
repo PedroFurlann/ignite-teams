@@ -31,6 +31,10 @@ export function Match() {
   const navigator = useNavigation();
 
   function handleAddOnePointTeamA() {
+    if (playersTeamA.length === 0) {
+      return Alert.alert("Pontuação", "Só é possível adicionar pontuações a um time com participantes!")
+    }
+    
     setPointsCounterTeamA((state) => state + 1);
   }
 
@@ -46,6 +50,10 @@ export function Match() {
   }
 
   function handleAddOnePointTeamB() {
+    if (playersTeamB.length === 0) {
+      return Alert.alert("Pontuação", "Só é possível adicionar pontuações a um time com participantes!")
+    }
+
     setPointsCounterTeamB((state) => state + 1);
   }
 
