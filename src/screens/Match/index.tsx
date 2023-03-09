@@ -27,7 +27,7 @@ export function Match() {
 
   const route = useRoute();
   const { group } = route.params as RouteParams;
-  
+
   const navigator = useNavigation();
 
   function handleAddOnePointTeamA() {
@@ -61,7 +61,7 @@ export function Match() {
   }
 
   function handleReturnToPlayers(group: string) {
-    navigator.navigate("players", { group })
+    navigator.navigate("players", { group });
   }
 
   async function fetchPlayersByTeamA() {
@@ -138,7 +138,7 @@ export function Match() {
         <ButtonIcon
           icon="add"
           type="PRIMARY"
-          style={{ width: 20, marginLeft: 20 }}
+          style={{ width: 20, marginLeft: 10 }}
           onPress={handleAddOnePointTeamB}
         />
 
@@ -160,10 +160,17 @@ export function Match() {
             <MatchPlayerCard icon="person" name={item.name} />
           )}
           ListEmptyComponent={() => (
-            <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
+            <EmptyList
+              message="Não possuem jogadores cadastrados nesse time! Que tal cadastrar novos jogadores?"
+              addBtn
+              onReturnScreen={() => handleReturnToPlayers(group)}
+            />
           )}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[{ marginLeft: 20 }]}
+          contentContainerStyle={[
+            { marginLeft: 20, paddingBottom: 100 },
+            playersTeamA.length <= 0 && { flex: 1, marginRight: 10 }
+          ]}
         />
         <FlatList
           data={playersTeamB}
@@ -172,10 +179,18 @@ export function Match() {
             <MatchPlayerCard icon="person" name={item.name} />
           )}
           ListEmptyComponent={() => (
-            <EmptyList message="Não possuem jogadores cadastrados! Que tal cadastrar novos jogadores?" />
+            <EmptyList
+              message="Não possuem jogadores cadastrados nesse time! Que tal cadastrar novos jogadores?"
+              addBtn
+              onReturnScreen={() => handleReturnToPlayers(group)}
+            />
           )}
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={[{ marginLeft: 40, marginRight: -20 }]}
+          contentContainerStyle={[
+            { paddingBottom: 100 },
+            playersTeamB.length > 0 && { marginLeft: 40, marginRight: -20 },
+            playersTeamB.length <= 0 && { flex: 1, marginLeft: 15 }
+          ]}
         />
       </ListContainer>
 
@@ -183,7 +198,7 @@ export function Match() {
         title="Encerrar partida"
         type="SECONDARY"
         onPress={() => handleReturnToPlayers(group)}
-        style={{ marginLeft: 16, marginRight: 16, marginTop: 100 }}
+        // style={{ marginLeft: 16, marginRight: 16, marginBottom: 10 }}
       />
     </Container>
   );
