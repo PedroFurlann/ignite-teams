@@ -70,7 +70,7 @@ $ expo start
 
 ### Imagens do Aplicativo / App Images :camera:
 
-  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams1.png" />
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams7.png" />
 
   <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams2.png" />
 
