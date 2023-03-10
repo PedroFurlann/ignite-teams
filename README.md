@@ -70,7 +70,16 @@ $ expo start
 
 ### Imagens do Aplicativo / App Images :camera:
 
-<div style="display: flex">
-  <img src="https://raw.githubusercontent.com/PedroFurlann/to-do-list-mobile/main/src/assets/todoEmpty.png" />
-  <img src="https://raw.githubusercontent.com/PedroFurlann/to-do-list-mobile/main/src/assets/todoList.png" />
-</div>
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams1.png" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams2.png" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams3.png" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams4.png" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams5.png" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams6.png" />
+
+  <img src="https://raw.githubusercontent.com/PedroFurlann/ignite-teams/main/src/assets/teams7.png" />
